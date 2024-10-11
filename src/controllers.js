@@ -36,7 +36,6 @@ exports.getDeviation = async (req, res, next) => {
       const { coin } = req.query;
       console.log(`Calculating deviation for coin: ${coin}`);
   
-      // Fetch the last 100 records for the specified coin
       const records = await Cryptocurrency.find({ name: coin })
         .sort({ timestamp: -1 })
         .limit(100);
@@ -45,17 +44,16 @@ exports.getDeviation = async (req, res, next) => {
         return res.status(404).json({ error: 'No data found for the specified coin' });
       }
   
-      // Calculate the mean
+  
       const prices = records.map(record => record.price);
       const mean = prices.reduce((sum, price) => sum + price, 0) / prices.length;
   
-      // Calculate the squared differences
       const squaredDifferences = prices.map(price => Math.pow(price - mean, 2));
   
-      // Calculate the variance
+     
       const variance = squaredDifferences.reduce((sum, sqDiff) => sum + sqDiff, 0) / prices.length;
   
-      // Calculate the standard deviation
+  
       const deviation = Math.sqrt(variance);
   
       console.log('Sending deviation response');

@@ -2,7 +2,7 @@ const axios = require('axios');
 const cron = require('node-cron');
 const Cryptocurrency = require('./models');
 
-// Fetch crypto data from the API
+
 const fetchCryptoData = async () => {
   const coins = ['bitcoin', 'matic-network', 'ethereum'];
   const apiUrl = 'https://api.coingecko.com/api/v3/coins/markets';
@@ -31,7 +31,6 @@ const fetchCryptoData = async () => {
   }
 };
 
-// Start background job to fetch crypto data every 2 hours
 const startBackgroundJob = () => {
   cron.schedule('0 */2 * * *', async () => {
     try {
@@ -43,5 +42,4 @@ const startBackgroundJob = () => {
   console.log('Background job scheduled to run every 2 hours');
 };
 
-// Export both functions
 module.exports = { fetchCryptoData, startBackgroundJob };

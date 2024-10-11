@@ -4,7 +4,6 @@ const { getStats, getDeviation } = require('./controllers');
 
 console.log('Routes file loaded');
 
-// Middleware to check for valid coin parameter
 const validateCoin = (req, res, next) => {
   console.log('validateCoin middleware called');
   const validCoins = ['bitcoin', 'matic-network', 'ethereum'];
